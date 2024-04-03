@@ -258,6 +258,16 @@
   </script>
 </head>
 <body>
+
+<main>
+  <img id="logo" alt="Logo de My Money Bank">
+  <div id="api">
+    <!-- Le contenu de ce div est remplacé par Azure AD -->
+    <!-- Pour tester en dev il est possible de copier/coller le contenu du fichier d'exemple -->
+    <!-- Le code ci-dessous est un exemple de ce qui est injecté par Azure, il peut-être utilisé pour tester le rendu en local -->
+  </div>
+  <a id="create-account-link" class="secondary-link buttons" href="#">Créer mon compte</a>
+</main>
 <script defer>
   function myScript() {
     setLogoUrl()
@@ -268,14 +278,5 @@
 
   window.onload = myScript
 </script>
-<main>
-  <img id="logo" alt="Logo de My Money Bank">
-  <div id="api">
-    <!-- Le contenu de ce div est remplacé par Azure AD -->
-    <!-- Pour tester en dev il est possible de copier/coller le contenu du fichier d'exemple -->
-    <!-- Le code ci-dessous est un exemple de ce qui est injecté par Azure, il peut-être utilisé pour tester le rendu en local -->
-  </div>
-  <a id="create-account-link" class="secondary-link buttons" href="#">Créer mon compte</a>
-</main>
 </body>
 </html>
