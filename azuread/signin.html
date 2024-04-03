@@ -254,14 +254,14 @@
         render();
       }
     }
-    window.onload = () => {
+    document.addEventListener("DOMContentLoaded", function() {
       console.log("dom loaded")
       setBackgroundImage()
       setLogoUrl()
       toggleAllViewPasswordButtons()
       setCreateAccountLink()
       console.log("scripts excuted")
-    }
+    })
   </script>
 </head>
 <body>
