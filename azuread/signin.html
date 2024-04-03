@@ -218,7 +218,7 @@
     // Local testing
     if (!window.SETTINGS && location && location.hostname === 'localhost') {
       console.debug("Activation du mode 'Test Local'");
-      window.SETTINGS = { remoteResource: location.href };
+      window.SETTINGS = {remoteResource: location.href};
     }
 
     const openedEye =
@@ -249,15 +249,25 @@
           inputPassword.setAttribute('type', isPasswordVisible ? 'text' : 'password');
           divIcon.innerHTML = isPasswordVisible ? openedEye : hiddenEye;
         }
-        buttonToogle.onclick = () => { isPasswordVisible = !isPasswordVisible; render(); }
+        buttonToogle.onclick = () => {
+          isPasswordVisible = !isPasswordVisible;
+          render();
+        }
         inputPassword.insertAdjacentElement('afterend', buttonToogle);
         render();
       }
     }
 
+    function run() {
+      setLogoUrl()
+      setCreateAccountLink()
+      setBackgroundImage()
+      toggleAllViewPasswordButtons()
+    }
+
   </script>
 </head>
-<body>
+<body onload="run();">
 
 <main>
   <img id="logo" alt="Logo de My Money Bank">
@@ -268,15 +278,5 @@
   </div>
   <a id="create-account-link" class="secondary-link buttons" href="#">Créer mon compte</a>
 </main>
-<script defer>
-  function myScript() {
-    setLogoUrl()
-    setCreateAccountLink()
-    setBackgroundImage()
-    toggleAllViewPasswordButtons()
-  }
-
-  window.onload = myScript
-</script>
 </body>
 </html>
