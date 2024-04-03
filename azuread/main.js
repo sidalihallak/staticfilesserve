@@ -1,0 +1,4 @@
+setBackgroundImage()
+setLogoUrl()
+toggleAllViewPasswordButtons()
+setCreateAccountLink()
