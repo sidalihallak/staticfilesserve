@@ -227,7 +227,7 @@
         <path style="fill: currentColor;" d="M47.48 19.93a10.39 10.39 0 1 0 10.39 10.38 10.4 10.4 0 0 0-10.39-10.38z" />
       </svg>`;
     const hiddenEye =
-        `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 95 60.6" height="100%">
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 95 60.6" height="100%">
           <g>
             <path style="fill: currentColor;" d="M47.5 0C27.1 0 8.6 11.8 0 30.3 12.1 56.5 43.2 68 69.5 55.8 80.7 50.6 89.8 41.6 95 30.3 86.4 11.8 67.9 0 47.5 0zm0 48.7c-10.1 0-18.4-8.2-18.4-18.4 0-10.1 8.2-18.4 18.4-18.4s18.4 8.2 18.4 18.4c-.1 10.2-8.3 18.4-18.4 18.4z" />
             <path style="fill: currentColor;" d="M47.5 19.9c-5.7 0-10.4 4.7-10.4 10.4s4.7 10.4 10.4 10.4S57.9 36 57.9 30.3s-4.7-10.4-10.4-10.4z" />
@@ -254,26 +254,25 @@
         render();
       }
     }
-
-  </script>
-  <script type="text/javascript">
-    document.addEventListener("DOMContentLoaded", function() {
+    window.onload = () => {
+      console.log("dom loaded")
       setBackgroundImage()
       setLogoUrl()
       toggleAllViewPasswordButtons()
       setCreateAccountLink()
-    });
+      console.log("scripts excuted")
+    }
   </script>
 </head>
-  <body>
-    <main>
-      <img id="logo" alt="Logo de My Money Bank">
-      <div id="api">
-        <!-- Le contenu de ce div est remplacé par Azure AD -->
-        <!-- Pour tester en dev il est possible de copier/coller le contenu du fichier d'exemple -->
-        <!-- Le code ci-dessous est un exemple de ce qui est injecté par Azure, il peut-être utilisé pour tester le rendu en local -->
-      </div>
-      <a id="create-account-link" class="secondary-link buttons" href="#">Créer mon compte</a>
-    </main>
-  </body>
+<body>
+<main>
+  <img id="logo" alt="Logo de My Money Bank">
+  <div id="api">
+    <!-- Le contenu de ce div est remplacé par Azure AD -->
+    <!-- Pour tester en dev il est possible de copier/coller le contenu du fichier d'exemple -->
+    <!-- Le code ci-dessous est un exemple de ce qui est injecté par Azure, il peut-être utilisé pour tester le rendu en local -->
+  </div>
+  <a id="create-account-link" class="secondary-link buttons" href="#">Créer mon compte</a>
+</main>
+</body>
 </html>
