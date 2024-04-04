@@ -262,6 +262,7 @@
     	const redirectUri = new URLSearchParams(window.location.search).get('redirect_uri')
       const changePasswordElt = document.getElementById('forgotPassword')
       const changePasswordUrl = changePasswordElt.href
+      console.log("changePasswordUrl", changePasswordUrl)
     	const newUrl = addSearchParams(changePasswordUrl, {'type-espace': typeEspace, 'redirect_uri': redirectUri})
     	changePasswordElt.href = newUrl
     }
