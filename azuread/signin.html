@@ -249,6 +249,22 @@
         render();
       }
     }
+    function addSearchParams(url, params) {
+      const urlObj = new URL(url);
+      for (const [key, value] of Object.entries(params)) {
+        urlObj.searchParams.append(key, value);
+      }
+      return urlObj.toString();
+    }
+
+    function updateChangePasswordUrlParams() {
+    	const typeEspace = new URLSearchParams(window.location.search).get('type-espace')
+    	const redirectUri = new URLSearchParams(window.location.search).get('redirect_uri')
+      const changePasswordElt = document.getElementById('forgotPassword')
+      const changePasswordUrl = changePasswordElt.href
+    	const newUrl = addSearchParams(changePasswordUrl, {'type-espace': typeEspace, 'redirect_uri': redirectUri})
+    	changePasswordElt.href = newUrl
+    }
 
   </script>
 </head>
@@ -268,5 +284,6 @@
     setLogoUrl()
     toggleAllViewPasswordButtons()
     setCreateAccountLink()
+    updateChangePasswordUrlParams()
   </script>
 </html>
