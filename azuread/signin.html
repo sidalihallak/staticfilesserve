@@ -146,7 +146,10 @@
 
   </style>
   <script type="text/javascript">
-    window.SETTINGS.transId += '&type-espace=sorefi'
+   const typeEspace = new URLSearchParams(window.location.search).get('type-espace')
+    const redirectUri = new URLSearchParams(window.location.search).get('redirect_uri')
+    if(typeEspace) window.SETTINGS.transId += `&type-espace=${typeEspace}`
+    if(redirectUri) window.SETTINGS.transId += `&redirect_uri=${typeEspace}`
     function setCreateAccountLink() {
       try {
         const createAccountLink = document.getElementById('create-account-link');
@@ -257,17 +260,6 @@
       }
       return urlObj.toString();
     }
-
-    function updateChangePasswordUrlParams() {
-    	const typeEspace = new URLSearchParams(window.location.search).get('type-espace')
-    	const redirectUri = new URLSearchParams(window.location.search).get('redirect_uri')
-      const changePasswordElt = document.getElementById('forgotPassword')
-      const changePasswordUrl = changePasswordElt.href
-      console.log("changePasswordUrl", changePasswordUrl)
-    	const newUrl = addSearchParams(changePasswordUrl, {'type-espace': typeEspace, 'redirect_uri': redirectUri})
-    	changePasswordElt.href = newUrl
-    }
-
   </script>
 </head>
   <body>
@@ -286,6 +278,5 @@
     setLogoUrl()
     toggleAllViewPasswordButtons()
     setCreateAccountLink()
-    updateChangePasswordUrlParams()
   </script>
 </html>
