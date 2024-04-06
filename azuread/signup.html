@@ -265,6 +265,12 @@
       onRefresh();
     }
   </script>
+  <script type="text/javascript" defer>
+        setBackgroundImage();
+        setLogoUrl();
+        updateFormInput();
+        setRefreshHandler();
+</script>
 </head>
   <body>
     <main>
@@ -273,12 +279,6 @@
         <!-- Le contenu de ce div est géré par Azure AD -->
       </div>
       <button aria-label="Annuler" class="sendNewCode" onclick="onCancelClick()">Annuler</button>
-      <script type="text/javascript">
-        setBackgroundImage();
-        setLogoUrl();
-        updateFormInput();
-        setRefreshHandler();
-      </script>
     </main>
   </body>
 </html>
