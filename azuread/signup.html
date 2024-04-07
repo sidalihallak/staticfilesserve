@@ -288,7 +288,9 @@
   </script>
   <script type="text/javascript" defer>
         setBackgroundImage();
-        setLogoUrl();
+        waitForElm("#logo").then(() => {
+          setLogoUrl();
+        })
         waitForElm("#api").then(() => {
           updateFormInput();
           setRefreshHandler();
