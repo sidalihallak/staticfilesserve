@@ -322,6 +322,11 @@
       new MutationObserver(callback).observe(document.getElementById('api'), { childList: true, subtree: true });
       onRefresh();
     }
+
+    function setEntity() {
+        const entityElt = document.getElementById("extension_Entity")
+        if (entityElt) entityElt.value = typeEspace === "sorefi" ? "REU" : "ANT"
+    }
     
     function waitForElm(selector) {
       return new Promise(resolve => {
@@ -345,13 +350,14 @@
     }
   </script>
   <script type="text/javascript" defer>
-        setBackgroundImage();
+        setBackgroundImage()
         waitForElm("#logo").then(() => {
-          setLogoUrl();
+          setLogoUrl()
         })
         waitForElm("#api").then(() => {
           updateFormInput();
-          setRefreshHandler();
+          setRefreshHandler()
+          setEntity()
         })
 </script>
 </head>
