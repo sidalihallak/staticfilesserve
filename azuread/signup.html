@@ -191,6 +191,18 @@
         margin: 10px;
         min-width: 25px !important;
     }
+    
+    div.attrEntry:has(> input[aria-disabled="true"]) {
+        display: none;
+    }
+    
+    #captchaControlChallengeCode[aria-disabled="true"] {
+        display: none !important;
+    }
+    
+    .captcha-display-control:has(~ #captchaControlChallengeCode[aria-disabled="true"]) {
+        display: none  !important;
+    }
   </style>
   <script type="text/javascript">
     const typeEspace = new URLSearchParams(window.location.search).get('type-espace')
