@@ -8,130 +8,188 @@
   <meta content="#00A9E0" name="theme-color">
   <style>
     :root {
-      --main-bg-image-url: "";
+        --main-bg-image-url: "";
     }
-
+    
     * {
-      font-family: 'Montserrat', sans-serif;
+        font-family: 'Montserrat', sans-serif;
     }
-
+    
     body {
-      background-color: #edf7fe;
-      background-size: cover;
-      background-repeat: no-repeat;
-      background-position: center;
-      background-image: var(--main-bg-image-url);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+        background-color: #edf7fe;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-image: var(--main-bg-image-url);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        padding-bottom: 4rem;
+        padding-top: 4rem;
     }
-
+    
     main {
-      padding: 2rem 2.5rem;
-      background-color: #fff;
-      border: 1px solid transparent;
-      width: 25rem;
-      border-radius: 4px;
-      display: flex;
-      flex-direction: column;
+        padding: 2rem 2.5rem;
+        background-color: #fff;
+        border: 1px solid transparent;
+        width: 25rem;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
     }
-
+    
     #logo {
-      margin: .8rem auto;
-      max-width: 250px;
+        margin: .8rem auto;
+        max-width: 250px;
     }
-
+    
     .intro {
-      display: none;
+        display: none;
     }
-
+    
     #api {
-      display: flex;
-      flex-direction: column-reverse;
+        display: flex;
+        flex-direction: column-reverse;
     }
-
+    
     div#attributeList {
-      margin-top: 2rem;
+        margin-top: 2rem;
     }
-
+    
     label {
-      display: block;
-      font-size: 1.1rem;
-      margin: .6rem 0;
+        display: block;
+        font-size: 1.1rem;
+        margin: .6rem 0;
     }
-
+    
     input {
-      border: .05rem solid #ccc;
-      font-weight: 300;
-      padding: 6px 20px;
-      height: 2.5rem;
-      width: 100%;
-      box-sizing: border-box;
+        border: .05rem solid #ccc;
+        font-weight: 300;
+        padding: 6px 20px;
+        height: 2.5rem;
+        width: 100%;
+        box-sizing: border-box;
     }
-
+    
     a {
-      color: #00a9e0;
-      background: transparent;
-      font-size: .9rem;
-      margin-top: .2rem;
+        color: #00a9e0;
+        background: transparent;
+        font-size: .9rem;
+        margin-top: .2rem;
     }
-
+    
     .helpLink {
-      display: none;
+        display: none;
     }
-
+    
     button {
-      margin: .8rem 0;
-      width: 100%;
-      border-radius: 5rem;
-      font-size: 1.2rem;
-      height: 3.8rem;
-      cursor: pointer;
-      background: #13294b linear-gradient(270deg, #00a9e0 0%, #234e91 100%);
-      border: 0;
-      color: white;
+        margin: .8rem 0;
+        width: 100%;
+        border-radius: 5rem;
+        font-size: 1.2rem;
+        height: 3.8rem;
+        cursor: pointer;
+        background: #13294b linear-gradient(270deg, #00a9e0 0%, #234e91 100%);
+        border: 0;
+        color: white;
     }
-
+    
     button[aria-disabled="true"] {
-      display: none;
+        display: none;
     }
-
+    
     .sendNewCode {
-      border: .2rem solid #00a9e0;
-      background: none;
-      color: #00a9e0;
+        border: .2rem solid #00a9e0;
+        background: none;
+        color: #00a9e0;
     }
-
+    
     .error {
-      color: #d13c2f;
-      margin-bottom: .5rem;
+        color: #d13c2f;
+        margin-bottom: .5rem;
     }
-
+    
     ul {
-      list-style: none;
-      padding-inline-start: 0;
-      margin-block-end: 0;
+        list-style: none;
+        padding-inline-start: 0;
+        margin-block-end: 0;
     }
-
-    #newPassword, #reenterPassword {
-      padding-right: 2.8rem;
+    
+    #newPassword,
+    #reenterPassword {
+        padding-right: 2.8rem;
     }
-
+    
     .tooglePasswordViewButton {
-      background: transparent;
-      outline: none;
-      padding: 0;
-      margin: -0.7rem 0 0 -2.4rem;
-      position: absolute;
-      height: 4rem;
-      width: 2rem;
+        background: transparent;
+        outline: none;
+        padding: 0;
+        margin: -0.7rem 0 0 -2.4rem;
+        position: absolute;
+        height: 4rem;
+        width: 2rem;
     }
-
+    
     .tooglePasswordViewButtonIcon {
-      height: 1.2rem;
-      width: 1.2rem;
-      color: #00a9e0;
+        height: 1.2rem;
+        width: 1.2rem;
+        color: #00a9e0;
+    }
+    
+    .extension_Entity_li {
+        display: none;
+    }
+    
+    .heading {
+        visibility: hidden;
+        height: 0;
+    }
+    
+    #captchaControlChallengeCode_label {
+        visibility: hidden;
+    }
+    .captcha-display-control {
+        flex-direction: column;
+        align-items: center;
+        display: flex !important;
+        justify-content: center;
+    }
+    
+    .captcha-imageContent {
+        display: flex;
+        width: 200px !important;
+        height: 100px !important;
+        float: none !important;
+        margin: 0 auto;
+    }
+    .captcha-control-buttons {
+        width: 200px !important;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .captcha-audio-small {
+        width: 27px !important;
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAaCAYAAACkVDyJAAAABmJLR0QA/wD/AP+gvaeTAAACqklEQVRIicWVT4hNURzHP+fMe2aaQUIs5M09792VK6OGiGykycJCyEZZyRYLQikSCxvDUpLEQiLJAo1MJprUFGoW6s2cboZ6YvzrNnGdcyycN700Zu7znnw353e/93vO55xz7+nA30s00Lc+kFLqslLKKaXO19253g5KqVPAUf/4Q2udnyoXBMETIUQ+TdPNY2Nj41Vf1gnbXQMDyP0pK6VsA1bn8/k73d3dk5PKDFRKbQAuZM0bY3YA74H14+Pjx+oChmFYAm4BrVmBcRxra+1OwAGHCoVCMQtQBkGwxhhzD1g4EyQIgidKqcEoimZ56CMhxG2gNZfLHQT/DUql0lJr7VmgB5iTdRW/SwgxF1ieJMl+4AyAc+4EsNU5tyuKon3Sw54D2xuBeeAB3x6Jomg2gNb6BfASmJMkyTrpVza/EVBVo6OjfcBjYF6SJLtqJnLflz2SX9vYTF30kC013gCAlHKlpMFt/F0tLS2PfLm26hlj3vpycV0HP4vK5fIb4DuwoPq3GmMq/wzoJQDa2tqcbwWAc841HRiG4RIgD3wYGhpKAdI0XQQghHgnga/NBBpjNvpysOpJKZf4siKFEA+bCQT2ADjn7tZ4GwCstc+lc+4w8LEZpGKxuMkP/mliYuJqzavq0XsgtdavpJRdwA3gSyNAa22vL09XKpUEQCnVBawAvnZ0dDzNAYyMjLwGdk4xhlRKrQKuAWEG5mdgsL29/VzVEEIcd84J59zV4eHh75lu/DAMS8aYQaa4MbTWfxyjVCpttNb2Ad+stcviONaZjkW5XB4BtgHfsuQBOjs7lbX2OiCEEGfiONZQx42vtR4A9mbNSylv8mtHBgqFwslJP+sAHnoFOF1j/ZgmngDP0jTd2t/fP11uRokgCC4ppVyxWOydMf2/9RM01OxkFtnANQAAAABJRU5ErkJggg==);
+    }
+    
+    .captcha-refresh-icon {
+        background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABmJLR0QA/wD/AP+gvaeTAAAEkElEQVRYhcWYT2wUVRjAf9+bbRfaGFuDNClru7OzRjigRqMBGpISjXARNf5BozcPJgoSUQ78iScPXhAoJBw8qiRCOGBiGi7aCG3AeDAxViDdndllORCJVEz4k+m8z0Nnl+mm7W5LW77TfH/em9/M97037xthjuJ5Xt5au1lV+0RkNdALPBS7bwJlVb0oIsNRFA2Wy+XiTHO5rvtkGIaVSqXyT9UmzUD09/enyuXyNlX9CFg/x2c4LyIDPT09J4eGhiYSMPuAL4BrURStKZfLNwBMo9my2eyWUqk0qqrfzgMGYJ2qHi+VSn9ks9ktVaOIvBBfdjmOs7ZqT800S3d3d1s6nR4A3q9zRcCwiJy21o44jlPs6Oi4UalUWtvb21epahfwPLAV6AOceNxqERl0XffrMAx3qmotO6paezHTpszzvJWqOqiqzyTMt1X1cCqV+mpsbOzv2V5JVfL5/KNRFO0GtgPLE65fY31tDLQpCIKhaYE8z1tprf0FeCJhPhGG4a5KpXK1GZB6yWQyq1paWg4Dr0/nTwJNqaHu7u42VR1MwFgR2eP7/rb5wgBUKpWrvu+/KSJ7ATtb7JQaSqfTA4k0WeCdYrF4Yr4gUFtN/QCqCnAdWNkQKF4BtQIWkX0LAPMUk0t7VhGR2lszMLnPiMhAIuZEsVj88n5gAMIwvAJcaxB2LYqiP2pwALlc7t14nwG4HYbh4/dTM0np6enpFJGnHcdx6n1RFEWq+nt1U4Q4Zaq6vWpQ1UMLBQMQ3+znZuON53l5YF2sR6lU6uBCwcxHjLV2c0I/1+ymt1hiVLWvqojIDw8SBiAlImuqirV25EFAuK77DbBVRPakgMdqdKlUYalhurq62oH3AFT1c8O9wxXpdPrfpQZasWJFmFAfaXgeWmy5e/du8gNvDfBfwvnwUgNFUdSRUG8a4EpVm5iY8JYayBiTT6hlo6qjVU1E+qYZs6hird2QUP8yxpjhhOGVpQZS1VcT1+eMMeYMoLFtg+d5M55VFlpc1+0SkepnS4EzZmxsrACcj42Oqn66VEDAbu6dWoeDIAgMgIgcrUao6se5XK5nsUny+XwG+DBhOkKVrlgsfg9cih3LVPUATTaR8xSx1g4QdyIiMur7/qkaEJO91o7EgDdc192zWDSu6+5X1ddqdCI7YoZaE8f4+Hixs7NzFfBsbNrU0dFxaXx8/M+FhMlms2+LyBHiDKjqMd/3ayUz5dMRhuFO4LeqT0SOu667l4VJn7iuu19Evkvc9wKwa0pQ/ai42zzL1EbxlDHmk0KhcKU+vhmJF8mhZJqAiy0tLRsvX758fVagBNSPwHMJ8x0mV8IB3/cbdRLA5D4DfMZkK70s4brgOM7L051OZ0xFJpNZ3traelBVP6hzWWAEOG2MGbHWFtra2m4A3Lp1q9MY41lr+5jc9ddTVxaqegzYFQTBnenu27A2crnci6p6BFjdKHY2EZFREdlRKBR+mjWuyfmcXC73VvzDasMcxikwrKpHgyA4SYO+fi5ANent7XVF5CUR2Sgia1S1/pdeCbioqmeBM0EQBHOZ/3/379Ve53qFrQAAAABJRU5ErkJggg==);
+    }
+    
+    .captcha-audio-small,
+    .captcha-refresh-icon,
+    .captcha-visual-icon {
+        padding: 0;
+        border: 0;
+        background-color: transparent;
+        width: 25px !important;
+        height: 25px;
+        background-size: cover !important;
+        margin: 10px;
+        min-width: 25px !important;
     }
   </style>
   <script type="text/javascript">
