@@ -328,6 +328,7 @@
     }
 
     function onCancelClick() {
+      const typeEspace = new URLSearchParams(location.search).get('type-espace');
       let entity = ''
       if (typeEspace === "sorefi") {
         entity = '/sorefi'
@@ -346,6 +347,7 @@
     }
 
     function setEntity() {
+        const typeEspace = new URLSearchParams(location.search).get('type-espace');
         const entityElt = document.getElementById("extension_Entity")
         if (entityElt) entityElt.value = typeEspace === "sorefi" ? "REU" : "ANT"
     }
