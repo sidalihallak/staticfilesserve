@@ -295,7 +295,7 @@
         const checkBoxelt = fromHTML(
           `<div class="cguContainer">
       <div class="cguCheckBoxContainer">
-        <input type="checkbox" class="cguCheckBox"/>
+        <input type="checkbox" class="cguCheckBox" id="cguCheckBox"/>
       </div>
       <div class="cguTextContainer">
         <span class="cguText">
@@ -518,24 +518,9 @@
   <img id="logo" alt="My Access Pro">
   <div id="api">
     <!-- Le contenu de ce div est géré par Azure AD -->
-    <div class="cguContainer">
-      <div class="cguCheckBoxContainer">
-        <input type="checkbox" class="cguCheckBox"/>
-      </div>
-      <div class="cguTextContainer">
-        <span class="cguText">
-          J’ai pris connaissance des
-          <a class="cguLink" href="https://www.somafi-soguafi.fr/conditions-generales.html" target="_blank" id="terms-and-conditions">
-            conditions générales
-          </a> de l’Espace Personnel et de la
-          <a class="cguLink" href="https://www.somafi-soguafi.fr/mentions-informatique-et-liberte.html" target="_blank" id="personal-data-protection-policy">
-            politique de protection de mes données personnelles
-          </a>.
-        </span>
-      </div>
-    </div>
   </div>
   <button aria-label="Annuler" class="sendNewCode" onclick="onCancelClick()">Annuler</button>
 </main>
 </body>
 </html>
+
