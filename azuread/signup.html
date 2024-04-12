@@ -294,15 +294,21 @@
         continueButton.disabled = true
         const checkBoxelt = fromHTML(
           `<div class="cguContainer">
-        <div class="cguCheckBoxContainer">
-          <input type="checkbox" class="cguCheckBox" id="cguCheckBox" />
-        </div>
-        <div class="cguTextContainer">
-          <span class="cguText">
-            J’ai pris connaissance des <a class="cguLink">conditions générales</a> de l’Espace Personnel et de la <a class="cguLink">politique de protection</a> de mes données personnelles.
-          </span>
-        </div>
-      </div>`)
+      <div class="cguCheckBoxContainer">
+        <input type="checkbox" class="cguCheckBox"/>
+      </div>
+      <div class="cguTextContainer">
+        <span class="cguText">
+          J’ai pris connaissance des
+          <a class="cguLink" target="_blank" id="terms-and-conditions">
+            conditions générales
+          </a> de l’Espace Personnel et de la
+          <a class="cguLink" target="_blank" id="personal-data-protection-policy">
+            politique de protection de mes données personnelles
+          </a>.
+        </span>
+      </div>
+    </div>`)
         continueButton.parentElement.insertBefore(checkBoxelt, continueButton)
         const checkBoxinput = document.getElementById("cguCheckBox")
         checkBoxinput.addEventListener('change', function () {
@@ -459,6 +465,17 @@
       const entityElt = document.getElementById("extension_Entity")
       if (entityElt) entityElt.value = typeEspace === "sorefi" ? "REU" : "ANT"
     }
+    function setLinks() {
+      const typeEspace = new URLSearchParams(location.search).get('type-espace');
+      const termsAndConditions = document.getElementById('terms-and-conditions');
+      const personalDataProtectionPolicy = document.getElementById('personal-data-protection-policy');
+      if(termsAndConditions && typeEspace) {
+        termsAndConditions.href = `https://www.${typeEspace}.fr/conditions-generales.html`
+      }
+      if(personalDataProtectionPolicy && typeEspace) {
+        personalDataProtectionPolicy.href = `https://www.${typeEspace}.fr/personal-data-protection-policy.html`
+      }
+    }
 
     function waitForElm(selector) {
       return new Promise(resolve => {
@@ -492,6 +509,7 @@
       setRefreshHandler()
       setEntity()
       addCgu()
+      setLinks()
     })
   </script>
 </head>
@@ -506,8 +524,13 @@
       </div>
       <div class="cguTextContainer">
         <span class="cguText">
-          J’ai pris connaissance des <a class="cguLink">conditions générales</a> de l’Espace Personnel et de la <a
-          class="cguLink">politique de protection</a> de mes données personnelles.
+          J’ai pris connaissance des
+          <a class="cguLink" href="https://www.somafi-soguafi.fr/conditions-generales.html" target="_blank" id="terms-and-conditions">
+            conditions générales
+          </a> de l’Espace Personnel et de la
+          <a class="cguLink" href="https://www.somafi-soguafi.fr/mentions-informatique-et-liberte.html" target="_blank" id="personal-data-protection-policy">
+            politique de protection de mes données personnelles
+          </a>.
         </span>
       </div>
     </div>
