@@ -473,7 +473,9 @@
         termsAndConditions.href = `https://www.${typeEspace}.fr/conditions-generales.html`
       }
       if(personalDataProtectionPolicy && typeEspace) {
-        personalDataProtectionPolicy.href = `https://www.${typeEspace}.fr/informatique-et-libertes.html`
+        personalDataProtectionPolicy.href = typeEspace === 'somafi' ?
+          'https://www.sorefi.fr/informatique-et-libertes.html':
+          'https://www.somafi-soguafi.fr/mentions-informatique-et-liberte.html'
       }
     }
 
