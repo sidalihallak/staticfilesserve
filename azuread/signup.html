@@ -304,7 +304,7 @@
             Conditions Générales d’Utilisation
           </a> de l’Espace Personnel et de la
           <a class="cguLink" target="_blank" id="personal-data-protection-policy">
-            politique de protection de mes données personnelles
+            politique de protection de vos données personnelles
           </a>.
         </span>
       </div>
@@ -470,7 +470,7 @@
       const termsAndConditions = document.getElementById('terms-and-conditions');
       const personalDataProtectionPolicy = document.getElementById('personal-data-protection-policy');
       if(termsAndConditions && typeEspace) {
-        termsAndConditions.href = `https://www.${typeEspace}.fr/conditions-generales.html`
+        termsAndConditions.href = ''
       }
       if(personalDataProtectionPolicy && typeEspace) {
         personalDataProtectionPolicy.href = typeEspace === 'sorefi' ?
@@ -525,4 +525,3 @@
 </main>
 </body>
 </html>
-
