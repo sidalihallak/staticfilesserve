@@ -470,7 +470,7 @@
       const termsAndConditions = document.getElementById('terms-and-conditions');
       const personalDataProtectionPolicy = document.getElementById('personal-data-protection-policy');
       if(termsAndConditions && typeEspace) {
-        termsAndConditions.href = ''
+        termsAndConditions.href = "javascript:void(0);"
       }
       if(personalDataProtectionPolicy && typeEspace) {
         personalDataProtectionPolicy.href = typeEspace === 'sorefi' ?
