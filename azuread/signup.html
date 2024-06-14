@@ -378,6 +378,12 @@
       }
     }
 
+    preventPasswordPaste() {
+      document.getElementById('reenterPassword').addEventListener('paste', function(e) {
+       e.preventDefault();
+      });
+    }
+
     const openedEye =
       `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94.96 60.63" height="100%">
         <path style="fill: currentColor;" d="M47.48 0A52.33 52.33 0 0 0 0 30.31a52.34 52.34 0 0 0 95 0A52.32 52.32 0 0 0 47.48 0zm0 48.68a18.37 18.37 0 1 1 18.37-18.37 18.37 18.37 0 0 1-18.37 18.37z" />
@@ -515,6 +521,7 @@
       setEntity()
       addCgu()
       setLinks()
+      preventPasswordPaste()
     })
   </script>
 </head>
