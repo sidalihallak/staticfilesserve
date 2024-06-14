@@ -270,6 +270,11 @@
       opacity: 0.3;
     }
 
+    .EmailBox:has(~ .emailVerificationCode_li[aria-hidden="false"]) {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
   </style>
   <script type="text/javascript">
     function fromHTML(html, trim = true) {
