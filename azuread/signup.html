@@ -292,6 +292,21 @@
       pointer-events: none;
       opacity: 0.5;
     }
+
+    #verifying_blurb {
+      border: .2rem solid #f3f3f3;
+      border-top: .2rem solid #3498db;
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      animation: spin 2s linear infinite;
+      color: transparent;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
   </style>
   <script type="text/javascript">
     function fromHTML(html, trim = true) {
