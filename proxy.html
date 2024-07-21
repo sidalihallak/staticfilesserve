@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CORS Proxy</title>
+</head>
+<body>
+    <script>
+        (function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const targetUrl = urlParams.get('url');
+            if (targetUrl) {
+                fetch(targetUrl)
+                    .then(response => response.text())
+                    .then(data => {
+                        document.body.innerHTML = data;
+                    })
+                    .catch(error => {
+                        document.body.innerHTML = 'Error fetching the URL.';
+                        console.error('Error:', error);
+                    });
+            } else {
+                document.body.innerHTML = 'No URL provided.';
+            }
+        })();
+    </script>
+</body>
+</html>
