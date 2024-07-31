@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta content="ie=edge" http-equiv="x-ua-compatible">
+  <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+  <title>Mon espace SOFI</title>
+  <meta content="#00A9E0" name="theme-color">
+  <style>
+    :root {
+      --main-bg-image-url: "";
+    }
+
+    * {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    body {
+      background-color: #edf7fe;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: linear-gradient(90deg, rgba(18, 12, 41, 0.72) 0%, rgba(7.62, 86.02, 130.69, 0.32) 70%, rgba(8, 94, 143, 0.08) 98%), var(--main-bg-image-url);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    main {
+      padding: 2rem 2.5rem;
+      background-color: #fff;
+      border: 1px solid transparent;
+      width: 25rem;
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #logo {
+      margin: .8rem auto;
+      max-width: 250px;
+    }
+
+    .intro {
+      display: none;
+    }
+
+    #api {
+      display: flex;
+      flex-direction: column-reverse;
+    }
+
+    div#attributeList {
+      margin-top: 2rem;
+    }
+
+    label {
+      display: block;
+      font-size: 1.1rem;
+      margin: .6rem 0;
+    }
+
+    input {
+      border: .05rem solid #ccc;
+      font-weight: 300;
+      padding: 6px 20px;
+      height: 2.5rem;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    a {
+      color: #00a9e0;
+      background: transparent;
+      font-size: .9rem;
+      margin-top: .2rem;
+    }
+
+    .helpLink {
+      display: none;
+    }
+
+    div.verificationControlContent > ul {
+      margin-bottom: 1rem;
+    }
+    button {
+      margin: .3rem 0;
+      width: 100%;
+      border-radius: 5rem;
+      font-size: 1.2rem;
+      height: 3.8rem;
+      cursor: pointer;
+      background: #FFCD01;
+      border: 0;
+      color: black;
+    }
+
+    button[aria-disabled="true"] {
+      display: none;
+    }
+
+    .sendNewCode {
+      border: .2rem solid #FFCD01;
+      background: none;
+      color: black;
+    }
+
+    .error {
+      color: #d13c2f;
+      margin-bottom: .5rem;
+    }
+
+    ul {
+      list-style: none;
+      padding-inline-start: 0;
+      margin-block-end: 0;
+    }
+
+    #newPassword,
+    #reenterPassword {
+      padding-right: 2.8rem;
+    }
+
+    .tooglePasswordViewButton {
+      background: transparent;
+      outline: none;
+      padding: 0;
+      margin: -0.7rem 0 0 -2.4rem;
+      position: absolute;
+      height: 4rem;
+      width: 2rem;
+    }
+
+    .tooglePasswordViewButtonIcon {
+      height: 1.2rem;
+      width: 1.2rem;
+      color: #00a9e0;
+    }
+
+    .extension_Entity_li {
+      display: none;
+    }
+
+    .heading {
+      display: none !important;
+    }
+
+    #captchaControlChallengeCode_label {
+      display: none !important;
+    }
+
+    .captcha-display-control {
+      flex-direction: column;
+      align-items: center;
+      display: flex !important;
+      justify-content: center;
+      margin-bottom: 1rem;
+      margin-top: 1rem;
+    }
+
+    .captcha-imageContent {
+      display: flex;
+      width: 200px !important;
+      height: 100px !important;
+      float: none !important;
+      margin: 0 auto;
+    }
+
+    .captcha-control-buttons {
+      width: 200px !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .captcha-audio-small {
+      width: 27px !important;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABwAAAAaCAYAAACkVDyJAAAABmJLR0QA/wD/AP+gvaeTAAACqklEQVRIicWVT4hNURzHP+fMe2aaQUIs5M09792VK6OGiGykycJCyEZZyRYLQikSCxvDUpLEQiLJAo1MJprUFGoW6s2cboZ6YvzrNnGdcyycN700Zu7znnw353e/93vO55xz7+nA30s00Lc+kFLqslLKKaXO19253g5KqVPAUf/4Q2udnyoXBMETIUQ+TdPNY2Nj41Vf1gnbXQMDyP0pK6VsA1bn8/k73d3dk5PKDFRKbQAuZM0bY3YA74H14+Pjx+oChmFYAm4BrVmBcRxra+1OwAGHCoVCMQtQBkGwxhhzD1g4EyQIgidKqcEoimZ56CMhxG2gNZfLHQT/DUql0lJr7VmgB5iTdRW/SwgxF1ieJMl+4AyAc+4EsNU5tyuKon3Sw54D2xuBeeAB3x6Jomg2gNb6BfASmJMkyTrpVza/EVBVo6OjfcBjYF6SJLtqJnLflz2SX9vYTF30kC013gCAlHKlpMFt/F0tLS2PfLm26hlj3vpycV0HP4vK5fIb4DuwoPq3GmMq/wzoJQDa2tqcbwWAc841HRiG4RIgD3wYGhpKAdI0XQQghHgnga/NBBpjNvpysOpJKZf4siKFEA+bCQT2ADjn7tZ4GwCstc+lc+4w8LEZpGKxuMkP/mliYuJqzavq0XsgtdavpJRdwA3gSyNAa22vL09XKpUEQCnVBawAvnZ0dDzNAYyMjLwGdk4xhlRKrQKuAWEG5mdgsL29/VzVEEIcd84J59zV4eHh75lu/DAMS8aYQaa4MbTWfxyjVCpttNb2Ad+stcviONaZjkW5XB4BtgHfsuQBOjs7lbX2OiCEEGfiONZQx42vtR4A9mbNSylv8mtHBgqFwslJP+sAHnoFOF1j/ZgmngDP0jTd2t/fP11uRokgCC4ppVyxWOydMf2/9RM01OxkFtnANQAAAABJRU5ErkJggg==);
+    }
+
+    .captcha-refresh-icon {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABmJLR0QA/wD/AP+gvaeTAAAEkElEQVRYhcWYT2wUVRjAf9+bbRfaGFuDNClru7OzRjigRqMBGpISjXARNf5BozcPJgoSUQ78iScPXhAoJBw8qiRCOGBiGi7aCG3AeDAxViDdndllORCJVEz4k+m8z0Nnl+mm7W5LW77TfH/em9/M97037xthjuJ5Xt5au1lV+0RkNdALPBS7bwJlVb0oIsNRFA2Wy+XiTHO5rvtkGIaVSqXyT9UmzUD09/enyuXyNlX9CFg/x2c4LyIDPT09J4eGhiYSMPuAL4BrURStKZfLNwBMo9my2eyWUqk0qqrfzgMGYJ2qHi+VSn9ks9ktVaOIvBBfdjmOs7ZqT800S3d3d1s6nR4A3q9zRcCwiJy21o44jlPs6Oi4UalUWtvb21epahfwPLAV6AOceNxqERl0XffrMAx3qmotO6paezHTpszzvJWqOqiqzyTMt1X1cCqV+mpsbOzv2V5JVfL5/KNRFO0GtgPLE65fY31tDLQpCIKhaYE8z1tprf0FeCJhPhGG4a5KpXK1GZB6yWQyq1paWg4Dr0/nTwJNqaHu7u42VR1MwFgR2eP7/rb5wgBUKpWrvu+/KSJ7ATtb7JQaSqfTA4k0WeCdYrF4Yr4gUFtN/QCqCnAdWNkQKF4BtQIWkX0LAPMUk0t7VhGR2lszMLnPiMhAIuZEsVj88n5gAMIwvAJcaxB2LYqiP2pwALlc7t14nwG4HYbh4/dTM0np6enpFJGnHcdx6n1RFEWq+nt1U4Q4Zaq6vWpQ1UMLBQMQ3+znZuON53l5YF2sR6lU6uBCwcxHjLV2c0I/1+ymt1hiVLWvqojIDw8SBiAlImuqirV25EFAuK77DbBVRPakgMdqdKlUYalhurq62oH3AFT1c8O9wxXpdPrfpQZasWJFmFAfaXgeWmy5e/du8gNvDfBfwvnwUgNFUdSRUG8a4EpVm5iY8JYayBiTT6hlo6qjVU1E+qYZs6hird2QUP8yxpjhhOGVpQZS1VcT1+eMMeYMoLFtg+d5M55VFlpc1+0SkepnS4EzZmxsrACcj42Oqn66VEDAbu6dWoeDIAgMgIgcrUao6se5XK5nsUny+XwG+DBhOkKVrlgsfg9cih3LVPUATTaR8xSx1g4QdyIiMur7/qkaEJO91o7EgDdc192zWDSu6+5X1ddqdCI7YoZaE8f4+Hixs7NzFfBsbNrU0dFxaXx8/M+FhMlms2+LyBHiDKjqMd/3ayUz5dMRhuFO4LeqT0SOu667l4VJn7iuu19Evkvc9wKwa0pQ/ai42zzL1EbxlDHmk0KhcKU+vhmJF8mhZJqAiy0tLRsvX758fVagBNSPwHMJ8x0mV8IB3/cbdRLA5D4DfMZkK70s4brgOM7L051OZ0xFJpNZ3traelBVP6hzWWAEOG2MGbHWFtra2m4A3Lp1q9MY41lr+5jc9ddTVxaqegzYFQTBnenu27A2crnci6p6BFjdKHY2EZFREdlRKBR+mjWuyfmcXC73VvzDasMcxikwrKpHgyA4SYO+fi5ANent7XVF5CUR2Sgia1S1/pdeCbioqmeBM0EQBHOZ/3/379Ve53qFrQAAAABJRU5ErkJggg==);
+    }
+
+    .captcha-audio-big {
+      width: 60px !important;
+      background-size: contain !important;
+      height: 56px !important;
+      background-color: transparent;
+      border: none;
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACkAAAAmCAYAAABZNrIjAAAABmJLR0QA/wD/AP+gvaeTAAAEF0lEQVRYheWYX4gVVRzHP78zeWXLAhWNZNs7Z+5A/0gtKEkKepGMwB5ClgotxIfopSLKssBeKiuJeqoXM6yUlIqkIHuIHqICBbVY7OHeObO2+KCpFFLsXWd+PeyZ3fGidL337t2i78vM73xnzvlwZs78fmfgPyCZiU5rtVqc5/kngFXVZ9M0fbeb/noOGUXRbar6JbDIN511zl3ZTZ+me6xphWG4WlW/YRoQYN4/3RdF0W5r7W9hGK6+kN8zSGvtehHZ1w5Uq1R1FbBQRPZGUXRzq98TyDAMNwHvA3M67GIDkAHzVHXPkiVLLi+b3UKKtfYNEdlKF++3c24f8JIPr69UKi+eN0inHcdxPDfLsg+AtW1AtDOOsdZ+D6wAmsaYmxqNRh06nMmhoaH5WZZ91Q7gJShX1ceAHKhkWfZ8YVwSZLVavSaKog1BEBwC7u6UJgzDXRdazWmaHgY+AxCRdXEcDwJcVrpGwjAcFpHHgVuBKy40gKp2yjY9kEixmj+uVqvLR0dHXcnbqqoPAHPOnTv3EPB6MZPGWrtDRHYDd10MsFdS1Y2AAlcZY3YCQeElSXJQVUc88IPgH3cURU8Cj8wkWFlpmn4uIm/78E5r7cNl308WwPIwDEMDBKq6qV+AhZrN5mZgzIebKX1pROTr0qUrTK1WuwFY3Ec+AMbGxv4SkTd9eF2tVltZeAMDA0eAcQARud1kWbaw34CFjDEfMplpyLLsvqJ9ZGSkCRzx4TLDDJVr7aher58EfgIQkTta7F/9cXFPq6BOJCLFjEUt1mnvL5h1SOCEP5bLO0TkNICqLpx1SFUtXre8xZpqn3VIESlm8FS5XVUXeP/MrEOq6jJ/mrS0L/DH04bJ9DQriuN4EbDUw/xQ9kTkWn96wgRBcKr15n4pz/N1+LwdBMEXRXscx3Px8MBh02g0jjK9wvqmwcHBAVV9yoe/NBqNqZnM83wpMBdAVQ8YIPPlf19VqVReAQZ9+Cql105V7ynOReRHA5AkyVuquqNfgGEY3q+qT/jwO+fcR2W/KNGAQ8650WJ1a5qmG4Bh4Fvg7ExCish2Jr+Df+R5vh6fv2Hq58KNPtwN51fmOOf2AHsu1rm19mpVvVdEtgBhp5Cqul9EVqnq+nJV7r2ibGxOTEzsgg6Li6GhoflBEHxKm/ucNneLVKvVW4wxB5ksxrc75zZCh7vFY8eOnQmCYDWwt5P7LyJjjHnHMzWNMVOLueOMU6/Xx51zw8C2HgBirX2ByT03wLZizw3d/8FQ59wzqvocXWQua+0aYIsPj46Pj79c9nuSu9M0fQ14FJjosIv3mMw8Z0Vk+Pjx43+WzZ4VGM65naq6hg4+X6q6HzipqmuTJPm51f///UQFSJLkgDFmJXAY+B14utdj/Cv1N/tJdIZW5zViAAAAAElFTkSuQmCC);
+      padding: 0;
+      margin: 25px auto 0 auto;
+    }
+
+    .captcha-visual-icon {
+      background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAABmJLR0QA/wD/AP+gvaeTAAACjUlEQVRYhcXYzWvUQBjH8e8Tm4MULFu9SFfcCVXPvpx9qRVUqAWh1rOlHkTx7J8hFkXw7gseWirUm/cKghdxuyVh67ZQqBIRWihkHw8mNV3X7G6y2f0dn2EyH2Yykxfhb8QYMwXMAGeAI+SbLeAT8MLzvLeAAgjA6OjooSAIXgNXc0Y0jYgs2bY9XS6Xf1mA9BMDoKrXdnd3XwIipVJpWkRe9QvTkFuWiMz0WxHLHQs4229FLOcsoNBvRSyHBwh3Wg7ZVtV5y7K+1ev1YyIyCQy26CMDOWE+i8iU53mVqFAsFkds214ETid1tHLAbIvIlOu6lXixVquti8htYKenIFWdb8REcV13RUQWegoCqkmN9XrdS2rPA3Q8cUDLMont3bWAiEwWi8WRZm3GmFOqOtlTEDBo2/Y7x3FONmKAN8DBpM5ijNEcUAA74Q1cVdUScKMVJm9QquSxZJmSFeQDs6p6VFWPAnfDWupkWbLNIAjG1tbWvsSLjuOcAD6oatOd1ippZ2hDRM5HGGPMhDFmAiA8pceAjV6BNoMguOK67kqImQUWgAVjzIMQtSIiF0VkPW/QvmUKMc/58wojwOMYqgJc6hTVCSgJEyUzql1QO5iuoNoBdYLJjGoFSoPJhEoCZcGkRv0P1A1MKpRF+JEfywZwIcI4jnMvA2YfKrwWrutWVPUy/x6eagE/GzBjnueVI4yqzmXE7KFUdS5ChWM0nui+BXzsAaZd1PKBoaGhLREZD4JgvFqtfoW9e+ZZlzF7KOB6oVD44fv+su/734eHhxdF5KaqPor+DxVXV1drkNvMNIuKyH3XdZ/GDfsGzbibUqGAh57nPYkKjdt+U0Tep3lKdxoRWVfVJRq+434DYLtfid+6s58AAAAASUVORK5CYII=);
+    }
+
+    .captcha-audio-small,
+    .captcha-refresh-icon,
+    .captcha-visual-icon {
+      padding: 0;
+      border: 0;
+      background-color: transparent;
+      width: 25px !important;
+      height: 25px;
+      background-size: cover !important;
+      margin: 10px;
+      min-width: 25px !important;
+    }
+
+    div.attrEntry:has(> input[aria-disabled="true"]) {
+      display: none;
+    }
+
+    #captchaControlChallengeCode::placeholder {
+      color: transparent;
+    }
+
+    #captchaControlChallengeCode {
+      margin-bottom: 1rem;
+    }
+
+    #captchaControlChallengeCode[aria-disabled="true"] {
+      display: none !important;
+    }
+
+    .captcha-display-control:has(~ #captchaControlChallengeCode[aria-disabled="true"]) {
+      display: none !important;
+    }
+
+    .cguContainer {
+      width: 100%;
+      height: 100%;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 12px;
+      display: inline-flex;
+      margin-top: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .cguContainer:has(~ #continue[aria-disabled="true"]) {
+      display: none !important;
+    }
+
+    .cguCheckBoxContainer {
+      width: 24px;
+      height: 24px;
+      position: relative;
+    }
+
+    .cguTextContainer {
+      flex: 1 1 0;
+    }
+
+    .cguText {
+      color: #13294B;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 22.40px;
+      word-wrap: break-word;
+    }
+
+    .cguLink {
+      color: #0079A6;
+      font-size: 16px;
+      font-weight: 500;
+      text-decoration: underline;
+      line-height: 22.40px;
+    }
+
+    .cguCheckBox {
+      width: 16px;
+      height: 16px;
+    }
+
+    .cguCheckBox {
+      width: 16px;
+      height: 16px;
+    }
+  </style>
+  <style>
+    button:disabled,
+    button[disabled] {
+      opacity: 0.3;
+    }
+
+    .EmailBox:has(~ .emailVerificationCode_li[aria-hidden="false"]) {
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    #verifying_blurb {
+      border: .2rem solid #f3f3f3; /* Light grey */
+      border-top: .2rem solid #3498db; /* Blue */
+      border-radius: 50%;
+      width: 3rem;
+      height: 3rem;
+      animation: spin 2s linear infinite;
+      color: transparent;
+    }
+
+    #verifying_blurb:empty {
+      display: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .simplemodal-wrap {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  </style>
+  <script type="text/javascript">
+    function fromHTML(html, trim = true) {
+      // Process the HTML string.
+      html = trim ? html.trim() : html;
+      if (!html) return null;
+
+      // Then set up a new template element.
+      const template = document.createElement('template');
+      template.innerHTML = html;
+      const result = template.content.children;
+
+      // Then return either an HTMLElement or HTMLCollection,
+      // based on whether the input HTML had one or more roots.
+      if (result.length === 1) return result[0];
+      return result;
+    }
+
+    function addCgu() {
+      const continueButton = document.getElementById("continue")
+      if(continueButton) {
+        continueButton.disabled = true
+        const checkBoxelt = fromHTML(
+          `<div class="cguContainer">
+      <div class="cguCheckBoxContainer">
+        <input type="checkbox" class="cguCheckBox" id="cguCheckBox"/>
+      </div>
+      <div class="cguTextContainer">
+        <span class="cguText">
+          En cochant cette case, vous reconnaissez avoir lu et vous acceptez les
+          <a class="cguLink" target="_blank" id="terms-and-conditions">
+            Conditions Générales d’Utilisation
+          </a> de l’Espace Personnel et de la
+          <a class="cguLink" target="_blank" id="personal-data-protection-policy">
+            politique de protection de vos données personnelles
+          </a>.
+        </span>
+      </div>
+    </div>`)
+        continueButton.parentElement.insertBefore(checkBoxelt, continueButton)
+        const checkBoxinput = document.getElementById("cguCheckBox")
+        checkBoxinput.addEventListener('change', function () {
+          continueButton.disabled = !checkBoxinput.checked
+        })
+      }
+
+    }
+
+    function getBaseMMBUrl() {
+      const settings = window.SETTINGS;
+      if (settings?.remoteResource) {
+        const remoteResource = new URL(settings.remoteResource);
+        remoteResource.search = '';
+        return new URL(remoteResource.toString() + '/..');
+      }
+      return new URL(window.location.toString() + '/..');
+    }
+
+    function setBackgroundImage() {
+      try {
+        const baseUrl = getBaseMMBUrl();
+        if (baseUrl) {
+          const imageName = 'sofiBackgroundImage.jpg';
+          const styleUrl = baseUrl.toString() + imageName;
+          document.documentElement.style.setProperty('--main-bg-image-url', "url('" + styleUrl + "')");
+        }
+      } catch (err) {
+        console.error("Impossible de valoriser l'image d'arrière fond", err);
+      }
+    }
+
+    function capitalizeEachWord(sentence) {
+      return sentence.replace(/\b\w/g, match => match.toUpperCase())
+    }
+
+    function setPageTitle() {
+      const typeEspace = new URLSearchParams(location.search).get('type-espace');
+      if (typeEspace) {
+        document.title = capitalizeEachWord(typeEspace)
+      }
+
+    }
+
+    function setLogoUrl() {
+      try {
+        const logoImg = document.getElementById('logo');
+        const baseUrl = getBaseMMBUrl();
+        if (baseUrl && logoImg) {
+          const typeEspace = new URLSearchParams(location.search).get('type-espace');
+          let imageName = 'logo_universal.png'
+          if (typeEspace === "sorefi") {
+            imageName = 'logo_sorefi.png'
+          }
+          if (typeEspace === "somafi-soguafi") {
+            imageName = 'logo_somafi_soguafi.jpg'
+          }
+          const logoUrl = baseUrl.toString() + imageName;
+          console.debug('Valorisation du logo avec:', logoUrl);
+          logoImg.setAttribute('src', logoUrl);
+        }
+      } catch (err) {
+        console.error("Impossible de valoriser l'image du logo", err);
+      }
+    }
+
+    const openedEye =
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94.96 60.63" height="100%">
+        <path style="fill: currentColor;" d="M47.48 0A52.33 52.33 0 0 0 0 30.31a52.34 52.34 0 0 0 95 0A52.32 52.32 0 0 0 47.48 0zm0 48.68a18.37 18.37 0 1 1 18.37-18.37 18.37 18.37 0 0 1-18.37 18.37z" />
+        <path style="fill: currentColor;" d="M47.48 19.93a10.39 10.39 0 1 0 10.39 10.38 10.4 10.4 0 0 0-10.39-10.38z" />
+      </svg>`;
+    const hiddenEye =
+      `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 95 60.6" height="100%">
+          <g>
+            <path style="fill: currentColor;" d="M47.5 0C27.1 0 8.6 11.8 0 30.3 12.1 56.5 43.2 68 69.5 55.8 80.7 50.6 89.8 41.6 95 30.3 86.4 11.8 67.9 0 47.5 0zm0 48.7c-10.1 0-18.4-8.2-18.4-18.4 0-10.1 8.2-18.4 18.4-18.4s18.4 8.2 18.4 18.4c-.1 10.2-8.3 18.4-18.4 18.4z" />
+            <path style="fill: currentColor;" d="M47.5 19.9c-5.7 0-10.4 4.7-10.4 10.4s4.7 10.4 10.4 10.4S57.9 36 57.9 30.3s-4.7-10.4-10.4-10.4z" />
+          </g>
+          <path style="fill: currentColor;" d="M13.5 64.3c-1.6-1.6-1.6-4.2 0-5.7L75.8-3.7c1.6-1.6 4.2-1.6 5.7 0 1.6 1.6 1.6 4.2 0 5.7L19.2 64.3c-1.6 1.6-4.1 1.6-5.7 0z" />
+        </svg>`;
+
+    function updateFormInput() {
+      for (const inputPassword of document.querySelectorAll('input[type=password]')) {
+        const buttonToogle = document.createElement('button');
+        buttonToogle.setAttribute('type', 'button');
+        buttonToogle.setAttribute('class', 'tooglePasswordViewButton');
+        const divIcon = document.createElement('div');
+        divIcon.setAttribute('class', 'tooglePasswordViewButtonIcon');
+        buttonToogle.appendChild(divIcon);
+        let isPasswordVisible = false;
+        const render = () => {
+          buttonToogle.setAttribute('title', isPasswordVisible ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+          inputPassword.setAttribute('type', isPasswordVisible ? 'text' : 'password');
+          divIcon.innerHTML = isPasswordVisible ? openedEye : hiddenEye;
+        }
+        buttonToogle.onclick = () => {
+          isPasswordVisible = !isPasswordVisible;
+          render();
+        }
+        inputPassword.insertAdjacentElement('afterend', buttonToogle);
+        render();
+      }
+    }
+
+    function onRefresh() {
+      // input email : auto-rempli avec le hint et désactivé s'il y a un hint
+      const inputEmail = document.getElementById('email');
+      if (inputEmail && !inputEmail.value) {
+        const emailHint = new URLSearchParams(window.location.search).get('login_hint');
+        if (emailHint) {
+          inputEmail.value = emailHint;
+          inputEmail.readOnly = true;
+        }
+      }
+      // bouton de changement d'email : affiché par défaut une fois le code vérifié, on le masque car il est inutile
+      const buttonChangeEmail = document.getElementById('emailVerificationControl_but_change_claims');
+      if (buttonChangeEmail) {
+        buttonChangeEmail.style = 'display: none;';
+      }
+      // bouton "Continuer" : n'est pas utilisable sauf une fois que le code de vérification a été validé, on le masque donc sauf dans ce cas
+      const buttonContinue = document.getElementById('continue');
+      const successMessage = document.getElementById('emailVerificationControl_success_message');
+      if (buttonContinue) {
+        const shouldDisplayContinueButton = (successMessage && successMessage.innerText.indexOf('Vous pouvez continuer maintenant.') !== -1) || document.getElementById('newPassword');
+        buttonContinue.style = shouldDisplayContinueButton ? '' : 'display: none;';
+      }
+      // bouton "Annuler" : provoque un bug Gatsby quand on clique dessus, on désactive son fonctionnement et un clic dessus provoque la navigation vers /app
+      const buttonCancel = document.getElementById('cancel');
+      if (buttonCancel) {
+        buttonCancel.style = 'display: none;'
+      }
+    }
+
+    function preventPasswordPaste() {
+      document.getElementById('reenterPassword').addEventListener('paste', function(e) {
+        e.preventDefault();
+      });
+    }
+
+    function onCancelClick() {
+      const typeEspace = new URLSearchParams(location.search).get('type-espace');
+      let entity = ''
+      if (typeEspace === "sorefi") {
+        entity = '/sorefi'
+      }
+      if (typeEspace === "somafi-soguafi") {
+        entity = '/somafi-soguafi'
+      }
+      const appUrl = new URL(new URLSearchParams(window.location.search).get('redirect_uri')).origin + `/mon-espace${entity}/connexion`;
+      window.location.assign(appUrl);
+    }
+
+    function setRefreshHandler() {
+      const callback = mutations => mutations.forEach(onRefresh);
+      new MutationObserver(callback).observe(document.getElementById('api'), {childList: true, subtree: true});
+      onRefresh();
+    }
+
+    function setEntity() {
+      const typeEspace = new URLSearchParams(location.search).get('type-espace');
+      const entityElt = document.getElementById("extension_Entity")
+      if (entityElt) entityElt.value = typeEspace === "sorefi" ? "REU" : "ANT"
+    }
+    function setLinks() {
+      const typeEspace = new URLSearchParams(location.search).get('type-espace');
+      const termsAndConditions = document.getElementById('terms-and-conditions');
+      const personalDataProtectionPolicy = document.getElementById('personal-data-protection-policy');
+      if(termsAndConditions && typeEspace) {
+        termsAndConditions.href = "javascript:void(0);"
+      }
+      if(personalDataProtectionPolicy && typeEspace) {
+        personalDataProtectionPolicy.href = typeEspace === 'sorefi' ?
+          'https://www.sorefi.fr/informatique-et-libertes.html':
+          'https://www.somafi-soguafi.fr/mentions-informatique-et-liberte.html'
+      }
+    }
+
+    function waitForElm(selector) {
+      return new Promise(resolve => {
+        if (document.querySelector(selector)) {
+          return resolve(document.querySelector(selector));
+        }
+
+        const observer = new MutationObserver(mutations => {
+          if (document.querySelector(selector)) {
+            observer.disconnect();
+            resolve(document.querySelector(selector));
+          }
+        });
+
+        // If you get "parameter 1 is not of type 'Node'" error, see https://stackoverflow.com/a/77855838/492336
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      });
+    }
+  </script>
+  <script type="text/javascript" defer>
+    setBackgroundImage()
+    setPageTitle()
+    waitForElm("#logo").then(() => {
+      setLogoUrl()
+    })
+    waitForElm("#api").then(() => {
+      updateFormInput()
+      setRefreshHandler()
+      setEntity()
+      addCgu()
+      setLinks()
+      preventPasswordPaste()
+    })
+  </script>
+</head>
+<body>
+<main>
+  <img id="logo" alt="My Access Pro">
+  <div id="api">
+    <!-- Le contenu de ce div est géré par Azure AD -->
+  </div>
+  <button aria-label="Annuler" class="sendNewCode" onclick="onCancelClick()">Annuler</button>
+</main>
+</body>
+</html>
