@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="ie=edge" http-equiv="x-ua-compatible">
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-  <title>Mon espace SOFI</title>
+  <title>my access pro dom</title>
   <meta content="#00A9E0" name="theme-color">
   <style>
     :root {
@@ -91,9 +91,9 @@
       font-size: 1.2rem;
       height: 3.8rem;
       cursor: pointer;
-      background: #FFCD01;
+      background: #13294b linear-gradient(270deg, #00a9e0 0%, #234e91 100%);
       border: 0;
-      color: black;
+      color: white;
     }
 
     button[aria-disabled="true"] {
@@ -101,9 +101,9 @@
     }
 
     .sendNewCode {
-      border: .2rem solid #FFCD01;
+      border: .2rem solid #00a9e0;
       background: none;
-      color: black;
+      color: #00a9e0;
     }
 
     .error {
@@ -319,51 +319,6 @@
     }
   </style>
   <script type="text/javascript">
-    function fromHTML(html, trim = true) {
-      // Process the HTML string.
-      html = trim ? html.trim() : html;
-      if (!html) return null;
-
-      // Then set up a new template element.
-      const template = document.createElement('template');
-      template.innerHTML = html;
-      const result = template.content.children;
-
-      // Then return either an HTMLElement or HTMLCollection,
-      // based on whether the input HTML had one or more roots.
-      if (result.length === 1) return result[0];
-      return result;
-    }
-
-    function addCgu() {
-      const continueButton = document.getElementById("continue")
-      if(continueButton) {
-        continueButton.disabled = true
-        const checkBoxelt = fromHTML(
-          `<div class="cguContainer">
-      <div class="cguCheckBoxContainer">
-        <input type="checkbox" class="cguCheckBox" id="cguCheckBox"/>
-      </div>
-      <div class="cguTextContainer">
-        <span class="cguText">
-          En cochant cette case, vous reconnaissez avoir lu et vous acceptez les
-          <a class="cguLink" target="_blank" id="terms-and-conditions">
-            Conditions Générales d’Utilisation
-          </a> de l’Espace Personnel et de la
-          <a class="cguLink" target="_blank" id="personal-data-protection-policy">
-            politique de protection de vos données personnelles
-          </a>.
-        </span>
-      </div>
-    </div>`)
-        continueButton.parentElement.insertBefore(checkBoxelt, continueButton)
-        const checkBoxinput = document.getElementById("cguCheckBox")
-        checkBoxinput.addEventListener('change', function () {
-          continueButton.disabled = !checkBoxinput.checked
-        })
-      }
-
-    }
 
     function getBaseMMBUrl() {
       const settings = window.SETTINGS;
@@ -379,7 +334,7 @@
       try {
         const baseUrl = getBaseMMBUrl();
         if (baseUrl) {
-          const imageName = 'sofiBackgroundImage.jpg';
+          const imageName = 'background.jpg';
           const styleUrl = baseUrl.toString() + imageName;
           document.documentElement.style.setProperty('--main-bg-image-url', "url('" + styleUrl + "')");
         }
@@ -406,13 +361,7 @@
         const baseUrl = getBaseMMBUrl();
         if (baseUrl && logoImg) {
           const typeEspace = new URLSearchParams(location.search).get('type-espace');
-          let imageName = 'logo_universal.png'
-          if (typeEspace === "sorefi") {
-            imageName = 'logo_sorefi.png'
-          }
-          if (typeEspace === "somafi-soguafi") {
-            imageName = 'logo_somafi_soguafi.jpg'
-          }
+          let imageName = 'logo_png.png'
           const logoUrl = baseUrl.toString() + imageName;
           console.debug('Valorisation du logo avec:', logoUrl);
           logoImg.setAttribute('src', logoUrl);
@@ -495,15 +444,7 @@
     }
 
     function onCancelClick() {
-      const typeEspace = new URLSearchParams(location.search).get('type-espace');
-      let entity = ''
-      if (typeEspace === "sorefi") {
-        entity = '/sorefi'
-      }
-      if (typeEspace === "somafi-soguafi") {
-        entity = '/somafi-soguafi'
-      }
-      const appUrl = new URL(new URLSearchParams(window.location.search).get('redirect_uri')).origin + `/mon-espace${entity}/connexion`;
+      const appUrl = new URL(new URLSearchParams(window.location.search).get('redirect_uri')).origin + '/mon-espace/connexion';
       window.location.assign(appUrl);
     }
 
@@ -518,19 +459,7 @@
       const entityElt = document.getElementById("extension_Entity")
       if (entityElt) entityElt.value = typeEspace === "sorefi" ? "REU" : "ANT"
     }
-    function setLinks() {
-      const typeEspace = new URLSearchParams(location.search).get('type-espace');
-      const termsAndConditions = document.getElementById('terms-and-conditions');
-      const personalDataProtectionPolicy = document.getElementById('personal-data-protection-policy');
-      if(termsAndConditions && typeEspace) {
-        termsAndConditions.href = "javascript:void(0);"
-      }
-      if(personalDataProtectionPolicy && typeEspace) {
-        personalDataProtectionPolicy.href = typeEspace === 'sorefi' ?
-          'https://www.sorefi.fr/informatique-et-libertes.html':
-          'https://www.somafi-soguafi.fr/mentions-informatique-et-liberte.html'
-      }
-    }
+
 
     function waitForElm(selector) {
       return new Promise(resolve => {
@@ -563,8 +492,6 @@
       updateFormInput()
       setRefreshHandler()
       setEntity()
-      addCgu()
-      setLinks()
       preventPasswordPaste()
     })
   </script>
