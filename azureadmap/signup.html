@@ -361,7 +361,7 @@
         const baseUrl = getBaseMMBUrl();
         if (baseUrl && logoImg) {
           const typeEspace = new URLSearchParams(location.search).get('type-espace');
-          let imageName = 'logo_png.png'
+          let imageName = 'logo_map.png'
           const logoUrl = baseUrl.toString() + imageName;
           console.debug('Valorisation du logo avec:', logoUrl);
           logoImg.setAttribute('src', logoUrl);
