@@ -151,24 +151,7 @@
     const redirectUri = new URLSearchParams(window.location.search).get('redirect_uri')
     if(typeEspace) window.SETTINGS.transId += `&type-espace=${typeEspace}`
     if(redirectUri) window.SETTINGS.transId += `&redirect_uri=${redirectUri}`
-    function setCreateAccountLink() {
-      try {
-        const createAccountLink = document.getElementById('create-account-link');
-        if (createAccountLink) {
-          const currentParams = new URLSearchParams(location.search);
-          const redirectUri = currentParams.get('redirect_uri');
-          const typeEspace = currentParams.get('type-espace');
-          if (redirectUri && typeEspace) {
-            const origin = (new URL(redirectUri)).origin;
-            const targetUrl = origin.toString() + '/mon-espace' + `${typeEspace ? '/'+typeEspace : ''}` + '/inscription'
-            createAccountLink.setAttribute('href', targetUrl.toString());
-          }
-        }
-      } catch (err) {
-        console.error("Impossible de valoriser l'url vers la création de compte", err)
-      }
-    }
-
+  
     function getBaseMMBUrl() {
       const settings = window.SETTINGS;
       if (settings && settings.remoteResource) {
@@ -258,13 +241,11 @@
     <!-- Pour tester en dev il est possible de copier/coller le contenu du fichier d'exemple -->
     <!-- Le code ci-dessous est un exemple de ce qui est injecté par Azure, il peut-être utilisé pour tester le rendu en local -->
   </div>
-  <a id="create-account-link" class="secondary-link buttons" href="#">Créer mon compte</a>
 </main>
 </body>
 <script type="text/javascript">
   setBackgroundImage()
   setLogoUrl()
   toggleAllViewPasswordButtons()
-  setCreateAccountLink()
 </script>
 </html>
