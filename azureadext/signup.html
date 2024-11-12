@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta content="ie=edge" http-equiv="x-ua-compatible">
   <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
-  <title>My Money Bank</title>
+  <title>My Money bank</title>
   <meta content="#00A9E0" name="theme-color">
   <style>
     :root {
@@ -84,15 +84,6 @@
     div.verificationControlContent > ul {
       margin-bottom: 1rem;
     }
-
-    .returnLink {
-      display: flex;
-    }
-
-    .returnLink > svg {
-      margin-right: 8px;
-    }
-
     button {
       margin: .3rem 0;
       width: 100%;
@@ -100,9 +91,9 @@
       font-size: 1.2rem;
       height: 3.8rem;
       cursor: pointer;
-      background: #FFCD01;
+      background: #13294b linear-gradient(270deg, #00a9e0 0%, #234e91 100%);
       border: 0;
-      color: black;
+      color: white;
     }
 
     button[aria-disabled="true"] {
@@ -110,9 +101,9 @@
     }
 
     .sendNewCode {
-      border: .2rem solid #FFCD01;
+      border: .2rem solid #00a9e0;
       background: none;
-      color: black;
+      color: #00a9e0;
     }
 
     .error {
@@ -224,6 +215,10 @@
       display: none;
     }
 
+    #captchaControlChallengeCode::placeholder {
+      color: transparent;
+    }
+
     #captchaControlChallengeCode {
       margin-bottom: 1rem;
     }
@@ -286,7 +281,6 @@
       width: 16px;
       height: 16px;
     }
-
   </style>
   <style>
     button:disabled,
@@ -325,57 +319,38 @@
     }
   </style>
   <script type="text/javascript">
+    function fromHTML(html, trim = true) {
+      // Process the HTML string.
+      html = trim ? html.trim() : html;
+      if (!html) return null;
 
+      // Then set up a new template element.
+      const template = document.createElement('template');
+      template.innerHTML = html;
+      const result = template.content.children;
 
-    function preventEnterOnPasswordFields() {
-      function handleEnter(event) {
-        if (event.keyCode === 13) {
-          event.preventDefault();
-          event.stopPropagation();
-          event.stopImmediatePropagation();
-        }
-      }
-
-      const passwordInputs = ["newPassword", "reenterPassword"];
-      passwordInputs.forEach(function(inputId) {
-        document.getElementById(inputId).addEventListener("keydown", handleEnter, true);
-      });
+      // Then return either an HTMLElement or HTMLCollection,
+      // based on whether the input HTML had one or more roots.
+      if (result.length === 1) return result[0];
+      return result;
     }
 
-    function getAzureMMBUrl() {
-      const settings = window.SETTINGS;
-      if (settings?.remoteResource) {
-        const remoteResource = new URL(settings.remoteResource);
-        remoteResource.search = '';
-        return new URL(remoteResource.origin + remoteResource.pathname + '/..');
-      }
-      return new URL(window.location.origin + window.location.pathname + '/..');
-    }
     function getBaseMMBUrl() {
       const settings = window.SETTINGS;
-      if (settings && settings.remoteResource) {
+      if (settings?.remoteResource) {
         const remoteResource = new URL(settings.remoteResource);
         remoteResource.search = '';
         return new URL(remoteResource.toString() + '/..');
       }
-      return undefined;
-    }
-    function getMMBUrl() {
-      const settings = window.SETTINGS;
-      if (settings?.remoteResource) {
-        const remoteResource = new URL(settings.remoteResource);
-        remoteResource.search = '';
-        return new URL(remoteResource.origin + '/..');
-      }
-      return new URL(window.location.origin + window.location.pathname + '/..');
+      return new URL(window.location.toString() + '/..');
     }
 
     function setBackgroundImage() {
       try {
-        const baseUrl = getAzureMMBUrl();
+        const baseUrl = getBaseMMBUrl();
         if (baseUrl) {
-          const typeEspace = new URLSearchParams(location.search).get('type-espace');
-          const imageName = typeEspace === 'pro' ? 'background_pro.jpg' : 'background_part.jpg';          
+           const typeEspace = new URLSearchParams(location.search).get('type-espace');
+          const imageName = typeEspace === 'pro' ? 'background_pro.jpg' : 'background_part.jpg';
           const styleUrl = baseUrl.toString() + imageName;
           document.documentElement.style.setProperty('--main-bg-image-url', "url('" + styleUrl + "')");
         }
@@ -384,12 +359,16 @@
       }
     }
 
+    function capitalizeEachWord(sentence) {
+      return sentence.replace(/\b\w/g, match => match.toUpperCase())
+    }
+
     function setLogoUrl() {
       try {
         const logoImg = document.getElementById('logo');
-        const baseUrl = getAzureMMBUrl();
+        const baseUrl = getBaseMMBUrl();
         if (baseUrl && logoImg) {
-           const logoUrl = baseUrl.toString() + "logo_mmb.png";
+          const logoUrl = baseUrl.toString() + "logo_mmb.png";
           console.debug('Valorisation du logo avec:', logoUrl);
           logoImg.setAttribute('src', logoUrl);
         }
@@ -397,13 +376,6 @@
         console.error("Impossible de valoriser l'image du logo", err);
       }
     }
-
-
-    function capitalizeEachWord(sentence) {
-      return sentence.replace(/\b\w/g, match => match.toUpperCase())
-    }
-
-
 
     const openedEye =
       `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 94.96 60.63" height="100%">
@@ -479,7 +451,7 @@
 
     function onCancelClick() {
       const typeEspace = new URLSearchParams(location.search).get('type-espace');
-      let entity = typeEspace === 'pro' ? '/pro' : ''
+      const entity = typeEspace === 'pro' ? '/pro' : '';
       const appUrl = new URL(new URLSearchParams(window.location.search).get('redirect_uri')).origin + `/mon-espace${entity}/connexion`;
       window.location.assign(appUrl);
     }
@@ -510,46 +482,6 @@
         });
       });
     }
-
-    function substituteTextError() {
-      var element = window.document.querySelectorAll(".itemLevel")[1];
-      var observer = new MutationObserver(function(mutationsList, observer) {
-        var innerHTML = mutationsList[0].target.innerHTML;
-        if (innerHTML.indexOf('Type of captcha') >= 0) {
-          observer.disconnect()
-          innerHTML = innerHTML.replace('Type of captcha', 'Le code de vérification');
-          mutationsList[0].target.innerHTML = innerHTML;
-          observer.observe(element, {characterData: true, childList: true, attributes: false})
-        }
-        if (innerHTML.indexOf('visual') >= 0) {
-          observer.disconnect()
-          innerHTML = innerHTML.replace('visual', 'visuel');
-          mutationsList[0].target.innerHTML = innerHTML;
-          observer.observe(element, {characterData: true, childList: true, attributes: false})
-        }
-
-      });
-      observer.observe(element, {characterData: true, childList: true, attributes: false})
-    }
-
-    function decodeHtml(encodedStr) {
-      // Crée un élément temporaire
-      const textarea = document.createElement('textarea');
-      textarea.innerHTML = encodedStr;
-      return textarea.value;
-    }
-
-    //Problème d'affichage (bug AzureAD) du message, sans décodage le message est : Saisissez les caract&#232;res affich&#233;s
-    function fixEncodingTextCaptchaElem() {
-      const inputElement = document.querySelector('#captchaControlChallengeCode');
-      var observer = new MutationObserver(function(mutationsList, observer) {
-        observer.disconnect()
-        mutationsList[0].target.placeholder = decodeHtml(mutationsList[0].target.placeholder)
-        mutationsList[0].target.title = decodeHtml(mutationsList[0].target.title);
-        observer.observe(inputElement, {characterData: false, childList: false, attributes: true})
-      });
-      observer.observe(inputElement, {characterData: false, childList: false, attributes: true})
-    }
   </script>
   <script type="text/javascript" defer>
     setBackgroundImage()
@@ -557,33 +489,19 @@
       setLogoUrl()
     })
     waitForElm("#api").then(() => {
-      preventEnterOnPasswordFields()
       updateFormInput()
       setRefreshHandler()
       preventPasswordPaste()
-      fixEncodingTextCaptchaElem()
-    })
-    waitForElm(".itemLevel").then(() => {
-      substituteTextError()
     })
   </script>
 </head>
 <body>
 <main>
-  <!--Bouton '<- Retour'-->
-  <a class="returnLink" href="javascript:onCancelClick()">
-    <svg fill="#00a9e0" height="17px" width="17px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
-         viewBox="-47.62 -47.62 571.45 571.45" xml:space="preserve" stroke="#00a9e0" stroke-width="14.28639">
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="7.619408"></g><g id="SVGRepo_iconCarrier"> <polygon points="476.213,223.107 57.427,223.107 151.82,128.713 130.607,107.5 0,238.106 130.607,368.714 151.82,347.5 57.427,253.107 476.213,253.107 "></polygon> </g>
-      </svg>
-    Retour
-  </a>
-
-  <img id="logo" alt="Logo Espace Personnel Dom">
+  <img id="logo" alt="My Access Pro">
   <div id="api">
     <!-- Le contenu de ce div est géré par Azure AD -->
   </div>
-  <button id="annuler" aria-label="Annuler" class="sendNewCode" onclick="onCancelClick()">Annuler</button>
+  <button aria-label="Annuler" class="sendNewCode" onclick="onCancelClick()">Annuler</button>
 </main>
 </body>
 </html>
