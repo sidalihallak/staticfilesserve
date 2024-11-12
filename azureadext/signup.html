@@ -360,15 +360,23 @@
       }
       return undefined;
     }
+    function getMMBUrl() {
+      const settings = window.SETTINGS;
+      if (settings?.remoteResource) {
+        const remoteResource = new URL(settings.remoteResource);
+        remoteResource.search = '';
+        return new URL(remoteResource.origin + '/..');
+      }
+      return new URL(window.location.origin + window.location.pathname + '/..');
+    }
 
     function setBackgroundImage() {
       try {
-        const baseUrl = getBaseMMBUrl();
+        const baseUrl = getAzureMMBUrl();
         if (baseUrl) {
           const typeEspace = new URLSearchParams(location.search).get('type-espace');
-          const imageName = typeEspace === 'pro' ? 'background_pro.jpg' : 'background_part.jpg';
+          const imageName = typeEspace === 'pro' ? 'background_pro.jpg' : 'background_part.jpg';          
           const styleUrl = baseUrl.toString() + imageName;
-          console.debug("Valorisation de l'image d'arrière fond avec:", styleUrl);
           document.documentElement.style.setProperty('--main-bg-image-url', "url('" + styleUrl + "')");
         }
       } catch (err) {
@@ -379,9 +387,9 @@
     function setLogoUrl() {
       try {
         const logoImg = document.getElementById('logo');
-        const baseUrl = getBaseMMBUrl();
+        const baseUrl = getAzureMMBUrl();
         if (baseUrl && logoImg) {
-          const logoUrl = baseUrl.toString() + "logo_mmb.png";
+           const logoUrl = baseUrl.toString() + "logo_mmb.png";
           console.debug('Valorisation du logo avec:', logoUrl);
           logoImg.setAttribute('src', logoUrl);
         }
