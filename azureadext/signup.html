@@ -229,7 +229,7 @@
 
     .protectionDesDonneesPersonnelles {
       font-weight: 500;
-      font-size: 1.4rem;
+      font-size: 0.8rem;
     }    
 
   </style>
@@ -331,9 +331,8 @@
     function setCGUUrl() {
        const cguLink = document.getElementById('protectionDesDonneesPersonnelles');
       try {
-        const baseUrl = getBaseMMBUrl();
-        if (baseUrl && cguLink) {
-          const cguUrl = baseUrl.toString() + "/protection-des-donnees/";
+        if (cguLink) {
+          const cguUrl = new URL(new URLSearchParams(window.location.search).get('redirect_uri')).origin + "/protection-des-donnees/";
           console.debug('Valorisation du url cgu avec:', cguUrl);
           cguLink.setAttribute('href', cguUrl);
         }
