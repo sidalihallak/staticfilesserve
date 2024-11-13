@@ -215,10 +215,6 @@
       display: none;
     }
 
-    #captchaControlChallengeCode::placeholder {
-      color: transparent;
-    }
-
     #captchaControlChallengeCode {
       margin-bottom: 1rem;
     }
@@ -477,6 +473,20 @@
       observer.observe(element, {characterData: true, childList: true, attributes: false})
     }
 
+   function decodeHtml(encodedStr) {
+      // Crée un élément temporaire
+      const textarea = document.createElement('textarea');
+      textarea.innerHTML = encodedStr;
+      return textarea.value;
+    }
+
+    //Problème d'affichage (bug AzureAD) du message, sans décodage le message est : Saisissez les caract&#232;res affich&#233;s
+    function fixEncodingTextCaptchaElem() {
+      const inputElement = document.getElementById('captchaControlChallengeCode');
+      inputElement.placeholder = decodeHtml(inputElement.placeholder);
+      inputElement.title = decodeHtml(inputElement.title);
+    }
+
     function waitForElm(selector) {
       return new Promise(resolve => {
         if (document.querySelector(selector)) {
@@ -507,6 +517,7 @@
       updateFormInput()
       setRefreshHandler()
       preventPasswordPaste()
+      fixEncodingTextCaptchaElem()
     })
 
     waitForElm(".itemLevel").then(() => {
