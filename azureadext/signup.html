@@ -462,6 +462,21 @@
       onRefresh();
     }
 
+   function substituteTextError() {
+      var element = window.document.querySelectorAll(".itemLevel")[1];
+      var observer = new MutationObserver(function(mutationsList, observer) {
+        var innerHTML = mutationsList[0].target.innerHTML;
+        if (innerHTML.indexOf('Type of captcha') >= 0) {
+            observer.disconnect()
+            innerHTML = innerHTML.replace('Type of captcha', 'Le code de vérification');
+            mutationsList[0].target.innerHTML = innerHTML;
+            observer.observe(element, {characterData: true, childList: true, attributes: false})
+        }     
+        
+      });
+      observer.observe(element, {characterData: true, childList: true, attributes: false})
+    }
+
     function waitForElm(selector) {
       return new Promise(resolve => {
         if (document.querySelector(selector)) {
@@ -492,6 +507,10 @@
       updateFormInput()
       setRefreshHandler()
       preventPasswordPaste()
+    })
+
+    waitForElm(".itemLevel").then(() => {
+      substituteTextError()
     })
   </script>
 </head>
