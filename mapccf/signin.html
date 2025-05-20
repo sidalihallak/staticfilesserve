@@ -195,7 +195,7 @@
         try {
           const dataPolicyElement = document.getElementById('dataPolicy');
           const baseUrl = getBaseMMBUrl();
-          if (baseUrl && dataPolicyUrl) {
+          if (baseUrl) {
             const dataPolicyUrl = baseUrl.toString() + "/protection-des-donnees/";
             console.debug('Valorisation du lien avec:', dataPolicyUrl);
             dataPolicyElement.setAttribute('href', dataPolicyUrl);
