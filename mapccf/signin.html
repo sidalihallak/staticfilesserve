@@ -286,11 +286,14 @@
 
     <script type="text/javascript" defer>
       setBackgroundImage()
-      setDataPolicyUrl()
       waitForElm("#logo").then(() => {
         setLogoUrl()
       })
-      
+
+      waitForElm("#dataPolicy").then(() => {
+        setDataPolicyUrl()
+      })
+    
       waitForElm("#api").then(() => {
         toggleAllViewPasswordButtons()
       })
