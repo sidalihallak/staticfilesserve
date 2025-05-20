@@ -193,7 +193,7 @@
 
       function setDataPolicyUrl() {
         try {
-          const dataPolicyElement document.getElementById('dataPolicy');
+          const dataPolicyElement = document.getElementById('dataPolicy');
           const baseUrl = getBaseMMBUrl();
           if (baseUrl && dataPolicyUrl) {
             const dataPolicyUrl = baseUrl.toString() + "/protection-des-donnees/";
