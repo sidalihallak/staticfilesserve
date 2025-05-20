@@ -191,6 +191,21 @@
         }
       }
 
+      function setDataPolicyUrl() {
+        try {
+          const dataPolicyElement document.getElementById('dataPolicy');
+          const baseUrl = getBaseMMBUrl();
+          if (baseUrl && dataPolicyUrl) {
+            const dataPolicyUrl = baseUrl.toString() + "/protection-des-donnees/";
+            console.debug('Valorisation du lien avec:', dataPolicyUrl);
+            dataPolicyElement.setAttribute('href', dataPolicyUrl);
+          }
+        } catch (err) {
+          console.error("Impossible de valoriser lu lien du protection de donnée", err);
+        }
+      }
+
+      
       function setLogoUrl() {
         try {
           const logoImg = document.getElementById('logo');
@@ -271,9 +286,11 @@
 
     <script type="text/javascript" defer>
       setBackgroundImage()
+      setDataPolicyUrl()
       waitForElm("#logo").then(() => {
         setLogoUrl()
       })
+      
       waitForElm("#api").then(() => {
         toggleAllViewPasswordButtons()
       })
@@ -287,7 +304,7 @@
         <!-- Pour tester en dev il est possible de copier/coller le contenu du fichier d'exemple -->
         <!-- Le code ci-dessous est un exemple de ce qui est injecté par Azure, il peut-être utilisé pour tester le rendu en local -->
       </div>
-      <a id="dataPolicy" target="_blank" href="https://www.google.com">Politique de protection de mes données personnelles</a>
+      <a id="dataPolicy" target="_blank">Politique de protection de mes données personnelles</a>
     </main>
   </body>
-</html>
+</html
