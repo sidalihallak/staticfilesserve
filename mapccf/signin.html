@@ -194,9 +194,9 @@
       function setDataPolicyUrl() {
         try {
           const dataPolicyElement = document.getElementById('dataPolicy');
-          const baseUrl = getBaseMMBUrl();
+          const baseUrl = new URL(new URLSearchParams(window.location.search).get('redirect_uri')).origin;
           if (baseUrl) {
-            const dataPolicyUrl = baseUrl.toString() + "protection-des-donnees";
+            const dataPolicyUrl = baseUrl + "/protection-des-donnees";
             console.debug('Valorisation du lien avec:', dataPolicyUrl);
             dataPolicyElement.setAttribute('href', dataPolicyUrl);
           }
